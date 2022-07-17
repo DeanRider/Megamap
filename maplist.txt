@@ -1,0 +1,5 @@
+Genome1.fa Reads1.fa
+Genome1.fa Reads2.fa
+Genome2.fa Reads1.fa
+Genome3.fa Reads2.fa
+Genome2.fa Reads1.fa

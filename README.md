@@ -6,5 +6,7 @@ The results are packaged in a folder for each read/reference pairing. Additional
 
 You must modify the maplist file by replacing your read and reference files into the list as depicted in the example maplist.txt file.
 
+Place Megamap, quickmap and maplist nto the bwa folder for mapping along with your fasta read and reference files.
+
 See Megaparse for parsing mpile output files.
 See sam2circos for parsing sam files for use with Circos mapping of chimreic read locations.

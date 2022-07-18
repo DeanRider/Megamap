@@ -8,5 +8,5 @@ You must modify the maplist file by replacing your read and reference files into
 
 Place Megamap, quickmap and maplist into the bwa folder for mapping along with your fasta read and reference files.
 
-See Megaparse for parsing mpile output files.
+See Megaparse for parsing mpileup output files.
 See sam2circos for parsing sam files for use with Circos mapping of chimreic read locations.

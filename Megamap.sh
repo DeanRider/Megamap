@@ -27,7 +27,7 @@ echo -e "\033[1;30m  ▀         ▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀▀�
 echo -e "\033[1;30m                                                                                                \033[0m";
 echo
 
-    bash quickmap.sh "$genome" "$reads" || true
+    bash quickmap2.sh "$genome" "$reads" || true
 done < "maplist.txt"
 
 echo

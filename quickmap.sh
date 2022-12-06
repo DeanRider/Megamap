@@ -26,7 +26,8 @@
 #
 # #########################################################################
 
-export PATH=$PATH:$HOME/bwa
+cd
+cd /Volumes/Seq_Backup/bwa
 set -e
 
 # #########################################################################
@@ -45,6 +46,7 @@ readsfile="$2"
 # #########################################################################
 
 echo "Mapping Run Progress Log" > $referencefile.$readsfile.log
+echo "Using Megamap2.sh / quickmap2.sh" >> $referencefile.$readsfile.log
 echo Reference file is $referencefile >> $referencefile.$readsfile.log
 echo Reads file is $readsfile >> $referencefile.$readsfile.log
 date >> $referencefile.$readsfile.log
@@ -89,44 +91,11 @@ echo -e "\033[1;37m                                      \033[0m";
   echo Indexing reference $referencefile with bwa
   echo Indexing reference $referencefile with bwa >> $referencefile.$readsfile.log
   echo
-  bwa index $referencefile
+  ./bwa index $referencefile
   echo Indexing completed successfully >> $referencefile.$readsfile.log
   date >> $referencefile.$readsfile.log
 echo " " >> $referencefile.$readsfile.log
   echo
-fi
-
-echo
-echo Checking for existing .sam files
-
-if [ -e $referencefile.sam ]
-then
-echo -e "\033[1;37m ███████╗██╗  ██╗██╗██████╗     ███╗   ███╗ █████╗ ██████╗ ██████╗ ██╗███╗   ██╗ ██████╗ \033[0m";
-echo -e "\033[1;37m ██╔════╝██║ ██╔╝██║██╔══██╗    ████╗ ████║██╔══██╗██╔══██╗██╔══██╗██║████╗  ██║██╔════╝ \033[0m";
-echo -e "\033[1;37m ███████╗█████╔╝ ██║██████╔╝    ██╔████╔██║███████║██████╔╝██████╔╝██║██╔██╗ ██║██║  ███╗\033[0m";
-echo -e "\033[1;37m ╚════██║██╔═██╗ ██║██╔═══╝     ██║╚██╔╝██║██╔══██║██╔═══╝ ██╔═══╝ ██║██║╚██╗██║██║   ██║\033[0m";
-echo -e "\033[1;37m ███████║██║  ██╗██║██║         ██║ ╚═╝ ██║██║  ██║██║     ██║     ██║██║ ╚████║╚██████╔╝\033[0m";
-echo -e "\033[1;37m ╚══════╝╚═╝  ╚═╝╚═╝╚═╝         ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝     ╚═╝     ╚═╝╚═╝  ╚═══╝ ╚═════╝ \033[0m";
-echo -e "\033[1;37m                                                                                         \033[0m";
-  echo $referencefile.sam found, Skipping Mapping of Reads
-  echo $referencefile.sam found, Skipping Mapping of Reads >> $referencefile.$readsfile.log
-else
-echo -e "\033[1;37m ███╗   ███╗ █████╗ ██████╗ \033[0m";
-echo -e "\033[1;37m ████╗ ████║██╔══██╗██╔══██╗\033[0m";
-echo -e "\033[1;37m ██╔████╔██║███████║██████╔╝\033[0m";
-echo -e "\033[1;37m ██║╚██╔╝██║██╔══██║██╔═══╝ \033[0m";
-echo -e "\033[1;37m ██║ ╚═╝ ██║██║  ██║██║     \033[0m";
-echo -e "\033[1;37m ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝     \033[0m";
-echo -e "\033[1;37m                            \033[0m";
-  echo Mapping reads $readsfile onto reference $referencefile with bwa mem
-  echo Mapping reads $readsfile onto reference $referencefile with bwa mem >> $referencefile.$readsfile.log
-  echo
-  bwa mem $referencefile $readsfile > $referencefile.sam  #./bwa changed to bwa
-  echo Mapping completed successfully >> $referencefile.$readsfile.log
-  date >> $referencefile.$readsfile.log
-echo " " >> $referencefile.$readsfile.log
-fi
-
 # #########################################################################
 #
 # Generate .fai, .dict files 
@@ -159,6 +128,42 @@ echo .fai, .dict files completed successfully >> $referencefile.$readsfile.log
 date >> $referencefile.$readsfile.log
 echo " " >> $referencefile.$readsfile.log
 
+fi
+
+echo
+echo Checking for existing .sam files
+
+if [ -e $referencefile.$readsfile.sam ]
+then
+echo -e "\033[1;37m ███████╗██╗  ██╗██╗██████╗     ███╗   ███╗ █████╗ ██████╗ ██████╗ ██╗███╗   ██╗ ██████╗ \033[0m";
+echo -e "\033[1;37m ██╔════╝██║ ██╔╝██║██╔══██╗    ████╗ ████║██╔══██╗██╔══██╗██╔══██╗██║████╗  ██║██╔════╝ \033[0m";
+echo -e "\033[1;37m ███████╗█████╔╝ ██║██████╔╝    ██╔████╔██║███████║██████╔╝██████╔╝██║██╔██╗ ██║██║  ███╗\033[0m";
+echo -e "\033[1;37m ╚════██║██╔═██╗ ██║██╔═══╝     ██║╚██╔╝██║██╔══██║██╔═══╝ ██╔═══╝ ██║██║╚██╗██║██║   ██║\033[0m";
+echo -e "\033[1;37m ███████║██║  ██╗██║██║         ██║ ╚═╝ ██║██║  ██║██║     ██║     ██║██║ ╚████║╚██████╔╝\033[0m";
+echo -e "\033[1;37m ╚══════╝╚═╝  ╚═╝╚═╝╚═╝         ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝     ╚═╝     ╚═╝╚═╝  ╚═══╝ ╚═════╝ \033[0m";
+echo -e "\033[1;37m                                                                                         \033[0m";
+  echo $referencefile.$readsfile.sam found, Skipping Mapping of Reads
+  echo $referencefile.$readsfile.sam found, Skipping Mapping of Reads >> $referencefile.$readsfile.log
+else
+echo -e "\033[1;37m ███╗   ███╗ █████╗ ██████╗ \033[0m";
+echo -e "\033[1;37m ████╗ ████║██╔══██╗██╔══██╗\033[0m";
+echo -e "\033[1;37m ██╔████╔██║███████║██████╔╝\033[0m";
+echo -e "\033[1;37m ██║╚██╔╝██║██╔══██║██╔═══╝ \033[0m";
+echo -e "\033[1;37m ██║ ╚═╝ ██║██║  ██║██║     \033[0m";
+echo -e "\033[1;37m ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝     \033[0m";
+echo -e "\033[1;37m                            \033[0m";
+  echo Mapping reads $readsfile onto reference $referencefile with bwa mem
+  echo Mapping reads $readsfile onto reference $referencefile with bwa mem >> $referencefile.$readsfile.log
+  echo
+  ./bwa mem $referencefile $readsfile > $referencefile.$readsfile.sam  #./bwa changed to bwa and back
+  echo Mapping completed successfully >> $referencefile.$readsfile.log
+  date >> $referencefile.$readsfile.log
+echo " " >> $referencefile.$readsfile.log
+
+
+
+fi
+
 # #########################################################################
 #
 # while you are here, might as well get some stats collected
@@ -176,7 +181,7 @@ echo -e "\033[1;37m ██╔══██╗██╔══██║██║╚
 echo -e "\033[1;37m ██████╔╝██║  ██║██║ ╚═╝ ██║\033[0m";
 echo -e "\033[1;37m ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝\033[0m";
 echo -e "\033[1;37m                            \033[0m";
-samtools view -S -b $referencefile.sam > $referencefile.bam
+samtools view -S -b $referencefile.$readsfile.sam > $referencefile.$readsfile.bam
 echo -e "\033[1;37m ███████╗ ██████╗ ██████╗ ████████╗\033[0m";
 echo -e "\033[1;37m ██╔════╝██╔═══██╗██╔══██╗╚══██╔══╝\033[0m";
 echo -e "\033[1;37m ███████╗██║   ██║██████╔╝   ██║   \033[0m";
@@ -184,7 +189,7 @@ echo -e "\033[1;37m ╚════██║██║   ██║██╔══
 echo -e "\033[1;37m ███████║╚██████╔╝██║  ██║   ██║   \033[0m";
 echo -e "\033[1;37m ╚══════╝ ╚═════╝ ╚═╝  ╚═╝   ╚═╝   \033[0m";
 echo -e "\033[1;37m                                   \033[0m";
-samtools sort $referencefile.bam -o $referencefile.sorted.bam
+samtools sort $referencefile.$readsfile.bam -o $referencefile.$readsfile.sorted.bam
 wait
 echo -e "\033[1;37m ██████╗ ███████╗██████╗ ████████╗██╗  ██╗\033[0m";
 echo -e "\033[1;37m ██╔══██╗██╔════╝██╔══██╗╚══██╔══╝██║  ██║\033[0m";
@@ -193,14 +198,14 @@ echo -e "\033[1;37m ██║  ██║██╔══╝  ██╔═══�
 echo -e "\033[1;37m ██████╔╝███████╗██║        ██║   ██║  ██║\033[0m";
 echo -e "\033[1;37m ╚═════╝ ╚══════╝╚═╝        ╚═╝   ╚═╝  ╚═╝\033[0m";
 echo -e "\033[1;37m                                          \033[0m";
-samtools depth -d 2000000 $referencefile.sorted.bam > $referencefile.DepthOfCoverage.out
+samtools depth -d 2000000 $referencefile.$readsfile.sorted.bam > $referencefile.$readsfile.DepthOfCoverage.out
 wait
 echo
 echo Adding Headers to Data files and removing some unwanted files
 echo reference position depth > DepthHeader
-cat DepthHeader $referencefile.DepthOfCoverage.out > $referencefile.DepthOfCoverage.txt
+cat DepthHeader $referencefile.$readsfile.DepthOfCoverage.out > $referencefile.$readsfile.DepthOfCoverage.txt
 rm DepthHeader
-rm $referencefile.DepthOfCoverage.out
+rm $referencefile.$readsfile.DepthOfCoverage.out
 echo -e "\033[1;37m ██╗ ██████╗ ██╗   ██╗\033[0m";
 echo -e "\033[1;37m ██║██╔════╝ ██║   ██║\033[0m";
 echo -e "\033[1;37m ██║██║  ███╗██║   ██║\033[0m";
@@ -208,7 +213,7 @@ echo -e "\033[1;37m ██║██║   ██║╚██╗ ██╔╝\033[
 echo -e "\033[1;37m ██║╚██████╔╝ ╚████╔╝ \033[0m";
 echo -e "\033[1;37m ╚═╝ ╚═════╝   ╚═══╝  \033[0m";
 echo -e "\033[1;37m                      \033[0m";
-samtools index $referencefile.sorted.bam
+samtools index $referencefile.$readsfile.sorted.bam
 echo -e "\033[1;37m ███████╗████████╗ █████╗ ████████╗███████╗\033[0m";
 echo -e "\033[1;37m ██╔════╝╚══██╔══╝██╔══██╗╚══██╔══╝██╔════╝\033[0m";
 echo -e "\033[1;37m ███████╗   ██║   ███████║   ██║   ███████╗\033[0m";
@@ -216,7 +221,7 @@ echo -e "\033[1;37m ╚════██║   ██║   ██╔══██
 echo -e "\033[1;37m ███████║   ██║   ██║  ██║   ██║   ███████║\033[0m";
 echo -e "\033[1;37m ╚══════╝   ╚═╝   ╚═╝  ╚═╝   ╚═╝   ╚══════╝\033[0m";
 echo -e "\033[1;37m                                           \033[0m";
-samtools idxstats $referencefile.sorted.bam > $referencefile.ContigLengthNumreads.txt
+samtools idxstats $referencefile.$readsfile.sorted.bam > $referencefile.$readsfile.ContigLengthNumreads.txt
 echo -e "\033[1;37m ██████╗ ██╗██╗     ███████╗██╗   ██╗██████╗ \033[0m";
 echo -e "\033[1;37m ██╔══██╗██║██║     ██╔════╝██║   ██║██╔══██╗\033[0m";
 echo -e "\033[1;37m ██████╔╝██║██║     █████╗  ██║   ██║██████╔╝\033[0m";
@@ -224,7 +229,7 @@ echo -e "\033[1;37m ██╔═══╝ ██║██║     ██╔══
 echo -e "\033[1;37m ██║     ██║███████╗███████╗╚██████╔╝██║     \033[0m";
 echo -e "\033[1;37m ╚═╝     ╚═╝╚══════╝╚══════╝ ╚═════╝ ╚═╝     \033[0m";
 echo -e "\033[1;37m                                             \033[0m";
-samtools mpileup -f $referencefile $referencefile.sorted.bam > $referencefile.Mpileup.txt
+samtools mpileup -d 0 -f $referencefile $referencefile.$readsfile.sorted.bam > $referencefile.$readsfile.Mpileup.txt
 
 echo Stats estimated successfully >> $referencefile.$readsfile.log
 date >> $referencefile.$readsfile.log
@@ -243,7 +248,7 @@ echo -e "\033[1;37m ██║     ██║  ██║╚██████╗�
 echo -e "\033[1;37m ╚═╝     ╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝\033[0m";
 echo -e "\033[1;37m                                                          \033[0m";
 mkdir package.$referencefile.$readsfile
-mv $referencefile.* ./package.$referencefile.$readsfile/
+mv $referencefile.$readsfile.* ./package.$referencefile.$readsfile/
 echo -e "\033[1;37m ███╗   ██╗███████╗██╗  ██╗████████╗\033[0m";
 echo -e "\033[1;37m ████╗  ██║██╔════╝╚██╗██╔╝╚══██╔══╝\033[0m";
 echo -e "\033[1;37m ██╔██╗ ██║█████╗   ╚███╔╝    ██║   \033[0m";

@@ -19,6 +19,11 @@ Place Megamap, quickmap and maplist into the bwa folder for mapping along with y
      - mpileup
      - DepthOfCoverage
      - ContigLengthNumreads
+     
+- Requirements:
+   - Mac OS (not likely to be POSIX compliant; originally implemented on Mojave but still working in Monterey)
+   - Samtools v1.9 https://github.com/samtools/samtools/releases/download/1.9/samtools-1.9.tar.bz2
+   - BWA-MEM v0.7.17-r1188 https://github.com/lh3/bwa/releases/download/v0.7.17/bwa-0.7.17.tar.bz2
 
 See Megaparse for parsing mpileup output files.
 See sam2circos for parsing sam files for use with Circos mapping of chimreic read locations.

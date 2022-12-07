@@ -6,7 +6,19 @@ The results are packaged in a folder for each read/reference pairing. Additional
 
 You must modify the maplist file by replacing your read and reference files into the list as depicted in the example maplist.txt file.
 
-Place Megamap, quickmap and maplist into the bwa folder for mapping along with your fasta read and reference files.
+Place Megamap, quickmap and maplist into the bwa folder for mapping along with your fasta read and reference files.  Use bash to run the script.
+
+- Following Megamap2.sh output includes:
+   - Index files used for mapping which remain in the bwa folder
+   - Data output for each read/reference set in a package containing:
+     - log
+     - sam
+     - bam
+     - sorted bam
+     - sorted bai
+     - mpileup
+     - DepthOfCoverage
+     - ContigLengthNumreads
 
 See Megaparse for parsing mpileup output files.
 See sam2circos for parsing sam files for use with Circos mapping of chimreic read locations.
